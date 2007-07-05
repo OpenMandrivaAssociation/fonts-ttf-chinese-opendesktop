@@ -1,5 +1,5 @@
 %define version 1.4.2
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary:	OpenDesktop.Org.tw Font
 Name:		fonts-ttf-chinese-opendesktop
@@ -12,8 +12,8 @@ License:	Arphic Public License
 Group:		System/Fonts/True type
 BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%name-%version-%release-root
-Requires(post): chkfontpath, mkfontdir, mkfontscale
-Requires(postun): chkfontpath, mkfontdir, mkfontscale
+Requires(post): mkfontdir, mkfontscale
+Requires(postun): mkfontdir, mkfontscale
 Obsoletes:	fonts-ttf-chinese-compat
 Provides:	fonts-ttf-chinese-compat = %{version}-%{release}
 
@@ -36,15 +36,17 @@ install -m 644 odosung-ExtB.ttf %{buildroot}/%{_datadir}/fonts/TTF/chinese-opend
 install -m 644 odokai.ttf %{buildroot}/%{_datadir}/fonts/TTF/chinese-opendesktop/
 install -m 644 odokai-ExtB.ttf %{buildroot}/%{_datadir}/fonts/TTF/chinese-opendesktop/
 
+mkdir -p %{buildroot}%_sysconfdir/X11/fontpath.d/
+ln -s ../../..%_datadir/fonts/TTF/chinese-opendesktop \
+    %{buildroot}%_sysconfdir/X11/fontpath.d/chinese-opendesktop:pri=50
+
 %post
-[ -x %{_sbindir}/chkfontpath ] && %{_sbindir}/chkfontpath -q -a %{_datadir}/fonts/TTF/chinese-opendesktop
 [ -x %{_bindir}/mkfontdir ] && %{_bindir}/mkfontdir %{_datadir}/fonts/TTF/chinese-opendesktop
 [ -x %{_bindir}/mkfontscale ] && %{_bindir}/mkfontscale %{_datadir}/fonts/TTF/chinese-opendesktop
 [ -x %{_bindir}/fc-cache ] && %{_bindir}/fc-cache
 
 %postun
 if [ "$1" = "0" ]; then
-  [ -x %{_sbindir}/chkfontpath ] && %{_sbindir}/chkfontpath -q -r %{_datadir}/fonts/TTF/chinese-opendesktop
   [ -x %{_bindir}/mkfontdir ] && %{_bindir}/mkfontdir %{_datadir}/fonts/TTF/chinese-opendesktop
   [ -x %{_bindir}/mkfontscale ] && %{_bindir}/mkfontscale %{_datadir}/fonts/TTF/chinese-opendesktop
   [ -x %{_bindir}/fc-cache ] && %{_bindir}/fc-cache
@@ -56,10 +58,7 @@ rm -fr %{buildroot}
 %files
 %defattr(0644,root,root,0755)
 %doc Changelog Changelog.zh_TW AUTHORS COPYRIGHT license
-%dir %{_datadir}/fonts/
-%dir %{_datadir}/fonts/TTF/
 %dir %{_datadir}/fonts/TTF/chinese-opendesktop/
 %{_datadir}/fonts/TTF/chinese-opendesktop/*.ttf
 %{_datadir}/fonts/TTF/chinese-opendesktop/*.ttc
-
-
+%{_sysconfdir}/X11/fontpath.d/chinese-opendesktop:pri=50
