@@ -11,7 +11,6 @@ URL:		http://www.opendesktop.org.tw/
 License:	Arphic Public License
 Group:		System/Fonts/True type
 BuildArch:	noarch
-BuildRoot:	%{_tmppath}/%name-%version-%release-root
 Requires(post): mkfontdir, mkfontscale
 Requires(postun): mkfontdir, mkfontscale
 Obsoletes:	fonts-ttf-chinese-compat
