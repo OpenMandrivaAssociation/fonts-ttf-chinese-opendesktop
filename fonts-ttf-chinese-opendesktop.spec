@@ -1,5 +1,5 @@
 %define version 1.4.2
-%define release %mkrel 5
+%define release %mkrel 6
 
 Summary:	OpenDesktop.Org.tw Font
 Name:		fonts-ttf-chinese-opendesktop
@@ -43,13 +43,11 @@ ln -s ../../..%_datadir/fonts/TTF/chinese-opendesktop \
 %post
 [ -x %{_bindir}/mkfontdir ] && %{_bindir}/mkfontdir %{_datadir}/fonts/TTF/chinese-opendesktop
 [ -x %{_bindir}/mkfontscale ] && %{_bindir}/mkfontscale %{_datadir}/fonts/TTF/chinese-opendesktop
-[ -x %{_bindir}/fc-cache ] && %{_bindir}/fc-cache
 
 %postun
 if [ "$1" = "0" ]; then
   [ -x %{_bindir}/mkfontdir ] && %{_bindir}/mkfontdir %{_datadir}/fonts/TTF/chinese-opendesktop
   [ -x %{_bindir}/mkfontscale ] && %{_bindir}/mkfontscale %{_datadir}/fonts/TTF/chinese-opendesktop
-  [ -x %{_bindir}/fc-cache ] && %{_bindir}/fc-cache
 fi
 
 %clean
