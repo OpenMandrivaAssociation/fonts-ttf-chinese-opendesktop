@@ -1,5 +1,5 @@
 %define version 1.4.2
-%define release %mkrel 7
+%define release %mkrel 8
 
 Summary:	OpenDesktop.Org.tw Font
 Name:		fonts-ttf-chinese-opendesktop
