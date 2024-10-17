@@ -7,7 +7,7 @@ Version:	%{version}
 Release:	%{release}
 
 Source:		ftp://ftp.opendesktop.org.tw/odp/ODOFonts/OpenFonts/opendesktop-fonts-%{version}.tar.gz
-URL:		http://www.opendesktop.org.tw/
+URL:		https://www.opendesktop.org.tw/
 License:	Arphic Public License
 Group:		System/Fonts/True type
 BuildArch:	noarch
